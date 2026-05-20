@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   Font Faces
+   ----------------------------------------------------------------------------
+   GT Walsheim is Wistia's display typeface. Drop the font files into
+   /public/fonts/walsheim/ to wire it up. Files expected:
+     - GT-Walsheim-Regular.woff2
+     - GT-Walsheim-Bold.woff2
+     - GT-Walsheim-Black.woff2
+   Download from: https://wistia.github.io/brand/fonts/GT-Walsheim.zip
+
+   Inter is Wistia's body typeface. We load it from Google Fonts in layout.tsx
+   so no local files needed.
+   ========================================================================== */
+
+@font-face {
+  font-family: "GT Walsheim";
+  src: url("/fonts/walsheim/GT-Walsheim-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim";
+  src: url("/fonts/walsheim/GT-Walsheim-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim";
+  src: url("/fonts/walsheim/GT-Walsheim-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================================================
+   Base
+   ========================================================================== */
+
+:root {
+  --wistia-blue-500: #2a49e5;
+  --wistia-blue-700: #222e67;
+  --wistia-blue-800: #000833;
+}
+
+html,
+body {
+  background: #f2f2f3;
+  color: #0c0c0e;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* The slide rendering container — we use this exact pattern in templates so
+   the export pipeline knows what to rasterize. */
+.slide-canvas {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate; /* keeps blend modes / shadows inside the slide */
+}
+
+/* Hide scrollbars on the slide thumbnail rail while keeping it scrollable */
+.thumb-rail::-webkit-scrollbar {
+  height: 6px;
+}
+.thumb-rail::-webkit-scrollbar-thumb {
+  background: rgba(34, 45, 102, 0.2);
+  border-radius: 999px;
+}
