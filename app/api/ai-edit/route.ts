@@ -51,7 +51,7 @@ Instruction: ${instruction}
 Return only the JSON object with updated fields.`;
 
     const resp = await client.messages.create({
-      model: 'claude-sonnet-4-5',
+      model: 'claude-sonnet-4-6',
       max_tokens: 1024,
       system: SYSTEM,
       messages: [{ role: 'user', content: userMsg }],

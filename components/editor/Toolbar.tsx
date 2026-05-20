@@ -121,7 +121,7 @@ export function Toolbar({ onAIEdit }: Props) {
         )}
       >
         <FileDown size={14} />
-        {exporting ? `Exporting ${exportProgress}%` : `PDF ${deck.slides.length}/${deck.slides.length}…`}
+        {exporting ? `Exporting ${exportProgress}%` : 'Export PDF'}
       </button>
     </div>
   );

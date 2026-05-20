@@ -207,6 +207,7 @@ type DeckStore = {
   duplicateSlide: (i: number) => void;
   deleteSlide: (i: number) => void;
   moveSlide: (from: number, to: number) => void;
+  reorderSlides: (slides: Slide[]) => void;
 
   updateSlide: (i: number, patch: Partial<Slide>) => void;
   updateContent: (i: number, patch: Partial<Slide['content']>) => void;
@@ -292,6 +293,14 @@ export const useDeckStore = create<DeckStore>((set, get) => ({
     const [moved] = slides.splice(from, 1);
     slides.splice(to, 0, moved);
     set({ deck: persist({ ...deck, slides }), activeIndex: to });
+  },
+
+  reorderSlides: (slides) => {
+    const { deck, activeIndex } = get();
+    if (!deck) return;
+    const activeId = deck.slides[activeIndex]?.id;
+    const newActive = slides.findIndex((s) => s.id === activeId);
+    set({ deck: persist({ ...deck, slides }), activeIndex: newActive >= 0 ? newActive : 0 });
   },
 
   updateSlide: (i, patch) => {

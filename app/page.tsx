@@ -7,11 +7,13 @@ import { nanoid } from 'nanoid';
 import { getRecents } from '@/lib/store';
 import { themes } from '@/lib/themes';
 import { WistiaMark } from '@/components/slides/WistiaMark';
-import { Plus, FileText, ArrowRight } from 'lucide-react';
+import { BriefModal } from '@/components/editor/BriefModal';
+import { Plus, FileText, ArrowRight, Sparkles } from 'lucide-react';
 
 export default function Home() {
   const router = useRouter();
   const [recents, setRecents] = useState<ReturnType<typeof getRecents>>([]);
+  const [briefOpen, setBriefOpen] = useState(false);
 
   useEffect(() => {
     setRecents(getRecents());
@@ -53,15 +55,16 @@ export default function Home() {
             </div>
           </button>
 
-          <div className="bg-grey-800 rounded-xl p-8 border border-grey-700">
-            <div className="text-grey-400 text-xs tracking-[0.2em] uppercase font-mono mb-4">
-              Coming soon
+          <button
+            onClick={() => setBriefOpen(true)}
+            className="group bg-grey-800 hover:bg-grey-700 rounded-xl p-8 border border-grey-700 hover:border-green-400 text-left transition"
+          >
+            <Sparkles size={28} className="mb-4 text-green-400" />
+            <div className="font-display font-bold text-2xl mb-1">From a brief</div>
+            <div className="text-grey-400 group-hover:text-grey-300 text-sm flex items-center gap-1 transition">
+              Paste a doc or paragraph — AI builds a 6-slide draft <ArrowRight size={14} className="group-hover:translate-x-1 transition" />
             </div>
-            <div className="font-display font-bold text-2xl mb-1 text-grey-300">From a brief</div>
-            <div className="text-grey-500 text-sm">
-              Paste a doc or paragraph and let AI build a 6-slide draft.
-            </div>
-          </div>
+          </button>
         </div>
 
         {recents.length > 0 && (
@@ -94,6 +97,8 @@ export default function Home() {
           </div>
         )}
       </div>
+
+      <BriefModal open={briefOpen} onClose={() => setBriefOpen(false)} />
     </div>
   );
 }
